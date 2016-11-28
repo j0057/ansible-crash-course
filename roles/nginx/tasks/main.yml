@@ -1,0 +1,24 @@
+- name: install nginx
+  yum:
+    name: nginx
+    state: installed
+  notify:
+  - restart nginx
+  - something custom
+
+- name: remove cruft
+  file:
+    name: "/etc/nginx/conf.d/{{ item }}"
+    state: absent
+  with_items:
+    - "{{ lijstje }}"
+    - virtual.conf
+    - default.conf
+    - ssl.conf
+  notify: restart nginx
+
+- name: configure nginx
+  template:
+    src: site.conf.j2
+    dest: /etc/nginx/conf.d/site.conf
+  notify: restart nginx

@@ -1,0 +1,7 @@
+- hosts: webserver
+  roles:
+  - role: nginx
+    status_code: 413
+    lijstje:
+      - dingetje
+      - dingetje
